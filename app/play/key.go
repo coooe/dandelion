@@ -1,13 +1,22 @@
 package play
 
-import "github.com/nbvghost/gweb/tool/encryption"
+import (
+	"github.com/nbvghost/dandelion/app/service/dao/sqltype"
+	"github.com/nbvghost/gweb/tool/encryption"
+)
+
+type SessionKey string
+
+const SessionKeyManager SessionKey = "SessionKeyManager"
+const SessionKeyAdmin SessionKey = "SessionKeyAdmin"
 
 const (
-	SessionAdmin          string = "ADMIN"        //商家后台
-	SessionManager        string = "MANAGER"      //系统管理
-	SessionUser           string = "USER"         //前台用户
-	SessionOrganization   string = "Organization" //前台用户
-	SessionStore          string = "STORE"        //
+	SessionAdmin          string = "ADMIN"         //商家后台
+	SessionManager        string = "MANAGER"       //系统管理
+	SessionUser           string = "USER"          //前台用户
+	SessionOrganization   string = "Organization"  //前台用户
+	SessionContentConfig  string = "ContentConfig" //
+	SessionStore          string = "STORE"         //
 	SessionAction         string = "ACTION"
 	SessionUserID         string = "USERID"
 	SessionOpenID         string = "OPENID"
@@ -34,18 +43,19 @@ const (
 	WxConfigType_miniprogram = "miniprogram" //小程序
 	WxConfigType_miniweb     = "miniweb"     //公众号
 )
-const (
-	ConfigurationKey_component_verify_ticket uint64 = 1001
-	ConfigurationKey_Poster                  uint64 = 1002
-	ConfigurationKey_ScoreConvertGrowValue   uint64 = 1100
 
-	ConfigurationKey_BrokerageLeve1 uint64 = 1201
-	ConfigurationKey_BrokerageLeve2 uint64 = 1202
-	ConfigurationKey_BrokerageLeve3 uint64 = 1203
-	ConfigurationKey_BrokerageLeve4 uint64 = 1204
-	ConfigurationKey_BrokerageLeve5 uint64 = 1205
-	ConfigurationKey_BrokerageLeve6 uint64 = 1206
+const (
+	ConfigurationKeyComponentVerifyTicket sqltype.ConfigurationKey = 1001
+	ConfigurationKeyPoster                sqltype.ConfigurationKey = 1002
+	ConfigurationKeyScoreConvertGrowValue sqltype.ConfigurationKey = 1100
+	ConfigurationKeyBrokerageLeve1        sqltype.ConfigurationKey = 1201
+	ConfigurationKeyBrokerageLeve2        sqltype.ConfigurationKey = 1202
+	ConfigurationKeyBrokerageLeve3        sqltype.ConfigurationKey = 1203
+	ConfigurationKeyBrokerageLeve4        sqltype.ConfigurationKey = 1204
+	ConfigurationKeyBrokerageLeve5        sqltype.ConfigurationKey = 1205
+	ConfigurationKeyBrokerageLeve6        sqltype.ConfigurationKey = 1206
 )
+
 const (
 	OS_Order    = "Order"    // order=下单成功，待付款
 	OS_Pay      = "Pay"      // pay=支付成功，待发货
@@ -115,4 +125,4 @@ const (
 	ContentTypeArticles = "articles"
 )
 
-var GWebSecretKey encryption.SecretKey = encryption.SecretKey(encryption.Md5ByString("ds1f4ds524f52ds4f5ds4"))
+var GWebSecretKey = encryption.SecretKey(encryption.Md5ByString("ds1f4ds524f52ds4f5ds4"))
